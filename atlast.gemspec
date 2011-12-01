@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Gerred Dillon"]
   s.email       = ["hello@gerred.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{This integrates with the AtLast API}
+  s.description = %q{Very rough state, but integrates with the AtLast API}
 
   s.rubyforge_project = "atlast"
 
