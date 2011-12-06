@@ -68,6 +68,12 @@ module Atlast
       response = RestClient.get ROOT_URL + "/cancel_shipment.aspx", params: params
       Crack::XML.parse response
     end
+
+    def shipment_status(order_id)
+      params = {key: key, id: order_id}
+      response = RestClient.get ROOT_URL + "/shipments.aspx", params: params
+      Crack::XML.parse response
+    end
   end
 
 end
