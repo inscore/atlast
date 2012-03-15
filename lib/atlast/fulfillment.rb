@@ -27,24 +27,19 @@ module Atlast
       inventory(sku)["response"]["products"]["product"]["availableQuantity"].to_i > 0
     end
 
-    def ship(options)
-      address = options[:address]
-      ship_method = options[:ship_method]
-      items = options[:items]
-      order_id = options[:order_id] || UUID.new.generate
-
+    def ship(address = {}, ship_method = "", items = [], order_id = UUID.new.generate)
       builder = Builder::XmlMarkup.new
       builder.instruct! :xml, version: "1.0", encoding: "UTF-8"
       xml = builder.Orders(apiKey: key) do |orders|
         orders.Order(orderID: order_id) do |order|
           order.CustomerInfo do |ci|
-            ci.FirstName address.first_name
-            ci.LastName address.last_name
-            ci.Address1 address.address
-            ci.Address2 address.suite
-            ci.City address.city
-            ci.State address.state
-            ci.Zip address.postal_code
+            ci.FirstName address[:first_name]
+            ci.LastName address[:last_name]
+            ci.Address1 address[:address1]
+            ci.Address2 address[:address2]
+            ci.City address[:city]
+            ci.State address[:state]
+            ci.Zip address[:postal_code]
             ci.Country "USA"
           end
           order.OrderDate Time.now.strftime("%D")
