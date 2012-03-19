@@ -1,6 +1,10 @@
 module Atlast
   class Fulfillment
-    ROOT_URL = "https://api.atlastfulfillment.com"
+    if ENV['RACK_ENV'] == 'production'
+      ROOT_URL = "https://api.atlastfulfillment.com"
+    else
+      ROOT_URL = "http://staging.api.atlastinc.com"
+    end
     attr_accessor :key
 
     def initialize(key)
