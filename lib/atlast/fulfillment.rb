@@ -10,7 +10,7 @@ module Atlast
     def initialize(key)
       @key = key
     end
-    
+
     def products
       products_xml = RestClient.get(ROOT_URL + "/products.aspx", params: {key: key})
       Crack::XML.parse products_xml
@@ -26,7 +26,7 @@ module Atlast
       inventory_xml = RestClient.get ROOT_URL + "/inventory.aspx", params: params
       Crack::XML.parse inventory_xml
     end
-    
+
     def available?(sku)
       inventory(sku)["response"]["products"]["product"]["availableQuantity"].to_i > 0
     end
