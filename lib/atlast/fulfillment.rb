@@ -1,14 +1,14 @@
 module Atlast
   class Fulfillment
-    if ENV['RACK_ENV'] == 'production'
-      ROOT_URL = "https://api.atlastfulfillment.com"
-    else
-      ROOT_URL = "http://staging.api.atlastinc.com"
-    end
     attr_accessor :key
 
-    def initialize(key)
+    def initialize(key, env="not-production")
       @key = key
+      if env == "production"
+        ROOT_URL = "https://api.atlastfulfillment.com"
+      else
+        ROOT_URL = "http://staging.api.atlastinc.com"
+      end
     end
 
     def products
@@ -51,8 +51,8 @@ module Atlast
           order.Items do |xml_items|
             items.each do |item|
               xml_items.Item do |xml_item|
-                xml_item.SKU item.sku
-                xml_item.Qty item.quantity
+                xml_item.SKU item[:sku]
+                xml_item.Qty item[:quantity]
               end
             end
           end
