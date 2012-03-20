@@ -7,7 +7,7 @@ module Atlast
       if env == "production"
         @root_url = "https://api.atlastfulfillment.com"
       else
-        @root_url = "https://staging.api.atlastfulfillment.com"
+        @root_url = "http://staging.api.atlastfulfillment.com"
       end
     end
 
