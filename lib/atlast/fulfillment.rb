@@ -33,7 +33,6 @@ module Atlast
 
     def ship(options = {})
       opts = {address: {}, ship_method: "", items: [], order_id: UUID.new.generate}.merge(options)
-      require 'ruby-debug'; Debugger.start; Debugger.settings[:autoeval] = 1; Debugger.settings[:autolist] = 1; debugger
       builder = Builder::XmlMarkup.new
       builder.instruct! :xml, version: "1.0", encoding: "UTF-8"
       xml = builder.Orders(apiKey: key) do |orders|
